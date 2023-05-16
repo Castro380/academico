@@ -9,6 +9,7 @@ const form = () => {
 
     function salvar(dados){
         console.log(dados);
+        set(ref(db,'cursos'),dados)
     }
     return (
         <Pagina titulo='Forms'>
