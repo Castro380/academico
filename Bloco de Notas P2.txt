@@ -1,0 +1,13 @@
+criar um projeto chamado academico e jogar os componentes (Pagina.js/ Cabecalho.js/ Rodape.js) na pasta
+
+(cd desktop)
+npx create-next-app@latest
+
+instalar as bibliotecas
+   axios
+   react-bootstrap
+   bootstrap
+   react-icons
+   react-hook-form
+   firebase
+   uuid
