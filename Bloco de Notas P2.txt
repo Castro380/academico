@@ -11,3 +11,11 @@ instalar as bibliotecas
    react-hook-form
    firebase
    uuid
+
+
+
+   'get recuperar' (getItem)
+   'set salvar' (setItem)
+
+
+   useEffect

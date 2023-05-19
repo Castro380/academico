@@ -7,14 +7,16 @@ const form = () => {
 
     const { register, handleSubmit } = useForm()
 
-    function salvar(dados){
-        console.log(dados);
-        set(ref(db,'cursos'),dados)
+    function salvar(dados) { //salvar dados no localstorage
+        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || [] // tirar de uma string
+        cursos.push(dados)
+        window.localStorage.setItem('cursos', JSON.stringify(cursos))//transformar em uma string
     }
+
     return (
         <Pagina titulo='Forms'>
 
-
+            
 
             <Form>
                 <Form.Group className="mb-3" controlId="nome">
