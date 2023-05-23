@@ -6,6 +6,7 @@ import { Button, Container, Table } from 'react-bootstrap'
 import { set } from 'react-hook-form';
 import { AiFillPlusCircle } from 'react-icons/ai'
 import { BsFillTrash3Fill } from 'react-icons/bs'
+import { BsFillPencilFill } from 'react-icons/bs'
 
 const index = () => {
 
@@ -20,11 +21,12 @@ const index = () => {
     }
 
     function excluir(id) {
-        const itens =  getAll()
-        itens.splice(id, 1)
-        window.localStorage.setItem('cursos', JSON.stringify(itens))
-        setCursos(itens)
-
+        if (confirm('Deseja realmente excluir o registro')) {
+            const itens = getAll()
+            itens.splice(id, 1)
+            window.localStorage.setItem('cursos', JSON.stringify(itens))
+            setCursos(itens)
+        }
     }
     return (
         <>
@@ -50,9 +52,14 @@ const index = () => {
                         {cursos.map((item, i) => (
                             <tr key={i}>
                                 <td>
-                                    <Button variant='warning'>
-                                        <BsFillTrash3Fill onClick={() => excluir(i)} className='text-danger' />
+                                    <Link href={'/cursos/' + i}>
+                                        <BsFillPencilFill title="Alterar" />
+                                    </Link>
+                                    {' '}
+                                    <Button variant='secundary' >
+                                        <BsFillTrash3Fill title="Excluir" onClick={() => excluir(i)} className="primary" />
                                     </Button>
+
 
                                 </td>
                                 <td>{item.nome}</td>

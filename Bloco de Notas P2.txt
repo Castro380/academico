@@ -18,4 +18,9 @@ instalar as bibliotecas
    'set salvar' (setItem)
 
 
-   useEffect
+   useEffect com getAll
+   const [cursos, setCursos] = useState([])
+
+    useEffect(() => {
+        setCursos(getAll())
+    }, [])
