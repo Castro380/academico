@@ -11,32 +11,20 @@ import { BsFillPencilFill } from 'react-icons/bs'
 
 const index = () => {
 
-    const [cursos, setCursos] = useState([])
+    const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
-        setCursos(getAll())
+
     }, [])
 
-    function getAll() {
-        return JSON.parse(window.localStorage.getItem('cursos')) || []
-    }
-
-    function excluir(id) {
-        if (confirm('Deseja realmente excluir o registro')) {
-            const itens = getAll()
-            itens.splice(id, 1)
-            window.localStorage.setItem('cursos', JSON.stringify(itens))
-            setCursos(itens)
-        }
-    }
     return (
         <>
-            <Pagina Titulo='Cursos'>
+            <Pagina Titulo='Disciplinas'>
 
             </Pagina>
             <Container>
 
-                <Link href="/cursos/form" className='mb-2 btn btn-primary mt-2'>
+                <Link href="/disciplinas/form" className='mb-2 btn btn-primary mt-2'>
                     <AiFillPlusCircle />
                     Novo
                 </Link>
@@ -50,10 +38,10 @@ const index = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {cursos.map((item, i) => (
+                        {disciplinas.map((item, i) => (
                             <tr key={i}>
                                 <td>
-                                    <Link href={'/cursos/' + i}>
+                                    <Link href={'/disciplina/' + i}>
                                         <BsFillPencilFill title="Alterar" />
                                     </Link>
                                     {' '}
@@ -70,15 +58,8 @@ const index = () => {
                         ))}
                     </tbody>
                 </Table>
-
-
             </Container>
-
-
-
         </>
-
-
     )
 }
 
