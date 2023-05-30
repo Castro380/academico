@@ -24,3 +24,15 @@ instalar as bibliotecas
     useEffect(() => {
         setCursos(getAll())
     }, [])
+
+-----------------------------------------------------
+axios.get('/api/diciplinas').then(resultado => {
+            
+        })
+        (resolve uma promessa)(theb /useEffect/)
+------------------------------------------------------
+
+get recupera dados
+post inserir dados
+delete deleta dados
+put altera dados

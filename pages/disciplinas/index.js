@@ -1,4 +1,5 @@
 import Pagina from '@/Componentes/Pagina'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
@@ -14,8 +15,20 @@ const index = () => {
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
+        getAll()
 
     }, [])
+
+    function getAll(){
+        axios.get('/api/disciplinas').then(resultado =>{
+            setDisciplinas(resultado.data);
+        })
+    }
+
+function excluir(id){
+    axios.delete('/api/disciplinas/' + id)
+    getAll()
+}
 
     return (
         <>
@@ -38,22 +51,22 @@ const index = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {disciplinas.map((item, i) => (
-                            <tr key={i}>
+                        {disciplinas.map((item) => (
+                            <tr key={item.id}>
                                 <td>
-                                    <Link href={'/disciplina/' + i}>
+                                    <Link href={'/disciplinas/' + item.id}>
                                         <BsFillPencilFill title="Alterar" />
                                     </Link>
                                     {' '}
                                     <Button variant='secundary' >
-                                        <BsFillTrash3Fill title="Excluir" onClick={() => excluir(i)} className="primary" />
+                                        <BsFillTrash3Fill title="Excluir" onClick={() => excluir(item.id)} className="primary" />
                                     </Button>
 
 
                                 </td>
                                 <td>{item.nome}</td>
                                 <td>{item.modalidade}</td>
-                                <td>{item.duracao}</td>
+                                <td>{item.curso}</td>
                             </tr>
                         ))}
                     </tbody>
