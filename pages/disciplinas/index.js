@@ -45,9 +45,9 @@ function excluir(id){
                 <Table striped bordered hover>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Nome</th>
-                            <th>Modalidade</th>
-                            <th>Duração</th>
+                            <th>Curso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,7 +65,7 @@ function excluir(id){
 
                                 </td>
                                 <td>{item.nome}</td>
-                                <td>{item.modalidade}</td>
+                                
                                 <td>{item.curso}</td>
                             </tr>
                         ))}
