@@ -14,7 +14,7 @@ const Cabecalho = () => {
             <Nav.Link href="/professores/">Professores</Nav.Link>
             <Nav.Link href="/turmas/">Turmas</Nav.Link>
             <Nav.Link href="/salas/">Salas</Nav.Link>
-            <Nav.Link href="/semestre/">Semestre</Nav.Link>
+            <Nav.Link href="/semestres/">semestres</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
