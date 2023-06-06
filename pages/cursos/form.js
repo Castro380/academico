@@ -1,51 +1,60 @@
 import Pagina from '@/Componentes/Pagina'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsCheckSquare, BsArrowLeftSquare } from 'react-icons/bs'
+import cursovalidator from '@/validators/cursoValidator'
 
 const form = () => {
 
-    const { register, handleSubmit } = useForm()
+    
+    const { push } = useRouter()
+    const { register, handleSubmit, formState: { errors } } = useForm()
 
     function salvar(dados) { //salvar dados no localstorage
-        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || [] // tirar de uma string
-        cursos.push(dados)
-        window.localStorage.setItem('cursos', JSON.stringify(cursos))//transformar em uma string
-    }
+            const cursos = JSON.parse(window.localStorage.getItem('cursos')) || [] // tirar de uma string
+        cursos.push('/cursos')
+    window.localStorage.setItem('cursos', JSON.stringify(cursos))//transformar em uma string
+}
 
-    return (
-        <Pagina titulo='Forms'>
+return (
+    <Pagina titulo='Cursos'>
 
+        <Form>
+            <Form.Group className="mb-3" controlId="nome">
+                <Form.Label>Nome:</Form.Label>
+                <Form.Control insivalid={errors.nome} type="text" {...register('nome', cursovalidator.nome)} />
+                {
+                    errors.nome &&
+                    <p className='mt -1 text-danger'>{errors.nome.message}</p>
+                }
+            </Form.Group>
 
+            <Form.Group className="mb-3" controlId="duracao">
+                <Form.Label>Duração:</Form.Label>
+                <Form.Control type="text" {...register('duracao', cursovalidator.duracao)} />
+            </Form.Group>
 
-            <Form>
-                <Form.Group className="mb-3" controlId="nome">
-                    <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="modalidade">
-                    <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
-                </Form.Group>
-                <div className='text-center'>
-                    <Button variant="success" onClick={handleSubmit(salvar)}>
-                        <BsCheckSquare className="me-2" />
-                        Salvar
-                    </Button>
-                    <Link className="ms-2 btn btn-danger" href="/cursos">
-                        <BsArrowLeftSquare className="me-2" />
-                        Voltar
-                    </Link>
-                </div>
-            </Form>
-        </Pagina>
-    )
+            <Form.Group className="mb-3" controlId="modalidade">
+                <Form.Label>Modalidade:</Form.Label>
+                <Form.Control type="text" {...register('modalidade', cursovalidator.modalidade)} />
+            </Form.Group>
+
+            <div className='text-center'>
+                <Button variant="success" onClick={handleSubmit(salvar)}>
+                    <BsCheckSquare className="me-2" />
+                    Salvar
+                </Button>
+                <Link className="ms-2 btn btn-danger" href="/cursos">
+                    <BsArrowLeftSquare className="me-2" />
+                    Voltar
+                </Link>
+            </div>
+        </Form>
+    </Pagina>
+)
 }
 
 export default form
