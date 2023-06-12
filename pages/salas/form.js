@@ -6,11 +6,12 @@ import React from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsCheckSquare, BsArrowLeftSquare } from 'react-icons/bs'
+import salaValidator from '@/validators/salaValidator'
 
 const form = () => {
 
     const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm()
 
     function salvar(dados) {
         axios.post('/api/salas', dados)
@@ -21,19 +22,28 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control isInvalid={errors.nome} type="text" {...register('nome', salaValidator.nome)} />
                 </Form.Group>
-
+                {
+                    errors.nome &&
+                    <p className='mt -1 text-danger'>{errors.nome.message}</p>
+                }
                 <Form.Group className="mb-3" controlId="capacidade">
                     <Form.Label>CAPACIDADE:</Form.Label>
-                    <Form.Control type="text" {...register('capacidade')} />
+                    <Form.Control isInvalid={errors.capacidade} type="text" {...register('capacidade', salaValidator.capacidade)} />
                 </Form.Group>
-
+                {
+                    errors.capacidade &&
+                    <p className='mt -1 text-danger'>{errors.capacidade.message}</p>
+                }
                 <Form.Group className="mb-3" controlId="tipo">
                     <Form.Label>TIPO: </Form.Label>
-                    <Form.Control type="text" {...register('tipo')} />
+                    <Form.Control isInvalid={errors.tipo} type="text" {...register('tipo', salaValidator.tipo)} />
                 </Form.Group>
-
+                {
+                    errors.tipo &&
+                    <p className='mt -1 text-danger'>{errors.tipo.message}</p>
+                }
                 <div className='text-center'>
                     <Button variant="success" onClick={handleSubmit(salvar)}>
                         <BsCheckSquare className="me-2" />
