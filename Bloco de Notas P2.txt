@@ -11,7 +11,7 @@ instalar as bibliotecas
    react-hook-form
    firebase
    uuid
-
+   npm i remask
 
 
    'get recuperar' (getItem)

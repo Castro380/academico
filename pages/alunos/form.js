@@ -7,16 +7,29 @@ import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsCheckSquare, BsArrowLeftSquare } from 'react-icons/bs'
 import alunoValidator from '@/validators/alunoValidator'
+import { mask } from 'remask'
 
 const form = () => {
 
     const { push } = useRouter()
-    const { register, handleSubmit, formState: {errors} } = useForm()
+    const { register, handleSubmit, setValue, formState: {errors} } = useForm()
 
     function salvar(dados) {
         axios.post('/api/alunos', dados)
         push('/alunos')
     }
+
+
+    function handleChange(event) {
+
+        const name = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute('mask')
+    
+        setValue(name, mask(valor, mascara))
+    
+    }
+
     return (
         <Pagina titulo='Alunos'>
             <Form>
@@ -30,7 +43,11 @@ const form = () => {
                 }
                 <Form.Group className="mb-3" controlId="cpf">
                     <Form.Label>CPF:</Form.Label>
-                    <Form.Control isInvalid={errors.cpf} type="text" {...register('cpf', alunoValidator.cpf)} />
+                    <Form.Control mask='999.999.999-99' 
+                     isInvalid={errors.cpf} type="text" 
+                     {...register('cpf', alunoValidator.cpf)} 
+                     onChange={handleChange}
+                      />
                 </Form.Group>
                 {
                     errors.cpf &&
