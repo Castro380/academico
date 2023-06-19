@@ -50,10 +50,6 @@ const alunoValidator = {
             value: 22,
             message: 'O máximo é 22'
         },
-        pattern: {
-            value: /^\d{3}.\d{3}.\d{3}-\d{2}$/,
-            message: "email inválido"
-        },
     },
     telefone: {
         required: 'Campo Obrigatório',

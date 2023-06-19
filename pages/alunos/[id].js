@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsCheckSquare, BsArrowLeftSquare } from 'react-icons/bs'
+import { mask } from 'remask'
 
 const form = () => {
 
@@ -30,6 +31,15 @@ const form = () => {
         axios.put('/api/alunos/' + query.id, dados)
         push('/alunos')
     }
+    function handleChange(event) {
+
+        const name = event.target.name
+        const valor = event.target.value
+        const mascara = event.target.getAttribute('mask')
+    
+        setValue(name, mask(valor, mascara))
+
+    }
 
     return (
         <Pagina titulo='Forms'>
@@ -41,7 +51,10 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="cpf">
                     <Form.Label>CPF: </Form.Label>
-                    <Form.Control type="text" {...register('cpf')} />
+                    <Form.Control 
+                    mask='999.999.999-99'
+                     type="text" {...register('cpf')} 
+                     onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="matricula">
@@ -56,12 +69,18 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="telefone">
                     <Form.Label>Telefone: </Form.Label>
-                    <Form.Control type="text" {...register('telefone')} />
+                    <Form.Control 
+                    mask='999.999.999-99'
+                    type="text" {...register('telefone')}
+                    onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="cep">
                     <Form.Label>CEP: </Form.Label>
-                    <Form.Control type="text" {...register('cep')} />
+                    <Form.Control 
+                    mask='999.999.999-99'
+                     type="text" {...register('cep')} 
+                     onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="logradouro">
